@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RfnStore - Penjualan Kuota Online</title>
+    <title>RFNSTORE - Penjualan Kuota Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
@@ -50,7 +50,7 @@
         <div class="bg-white rounded-2xl p-8 w-96 max-w-md mx-4 shadow-2xl">
             <div class="text-center mb-6">
                 <i class="fas fa-wifi text-4xl text-blue-600 mb-4"></i>
-                <h2 id="authTitle" class="text-2xl font-bold text-gray-800">Login RfnStore</h2>
+                <h2 id="authTitle" class="text-2xl font-bold text-gray-800">Login RFNSTORE</h2>
                 <p id="authSubtitle" class="text-gray-600 mt-2">Masuk ke akun Anda</p>
             </div>
             
@@ -132,7 +132,7 @@
                 <div class="flex items-center space-x-3">
                     <i class="fas fa-wifi text-2xl text-blue-600"></i>
                     <div>
-                        <h1 class="text-xl font-bold text-gray-800">RfnStore</h1>
+                        <h1 class="text-xl font-bold text-gray-800">RFNSTORE</h1>
                         <p id="userRole" class="text-sm text-gray-600"></p>
                     </div>
                 </div>
@@ -222,7 +222,7 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-gray-600 text-xs md:text-sm">Saldo</p>
-                                    <p class="text-xl md:text-2xl font-bold text-purple-600 balance-display">Rp 50.000</p>
+                                    <p class="text-xl md:text-2xl font-bold text-purple-600 balance-display">Rp 0</p>
                                 </div>
                                 <i class="fas fa-wallet text-2xl md:text-3xl text-purple-600"></i>
                             </div>
@@ -602,7 +602,7 @@
 
     <!-- Payment Code Modal -->
     <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl p-8 w-96 max-w-md mx-4 shadow-2xl">
+        <div class="bg-white rounded-2xl p-6 w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto shadow-2xl">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-xl font-bold text-gray-800">Kode Pembayaran</h3>
                 <button onclick="closePaymentModal()" class="text-gray-500 hover:text-gray-700">
@@ -651,7 +651,7 @@
         
         // Load registered users from localStorage or use default
         let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [
-            { username: 'admin', password: 'admin123', role: 'admin', email: 'admin@quotastore.com', phone: '081234567890' },
+            { username: 'admin', password: 'admin123', role: 'admin', email: 'admin@RFNSTORE.com', phone: '081234567890' },
             { username: 'rifan16', password: '16082002', role: 'admin', email: 'rifan16@example.com', phone: '081234567891' }
         ];
         
@@ -691,7 +691,7 @@
         let allTopupRequests = JSON.parse(localStorage.getItem('allTopupRequests')) || []; // Global top up storage
         let currentPayment = null;
         let paymentTimer = null;
-        let userBalance = 50000;
+        let userBalance = 0;
 
         // Load user balance from localStorage
         function loadUserBalance() {
@@ -700,7 +700,7 @@
                 if (savedBalance) {
                     userBalance = parseInt(savedBalance);
                 } else {
-                    userBalance = 50000; // Default balance for new users
+                    userBalance = 0; // Default balance for new users
                 }
             }
         }
@@ -719,7 +719,7 @@
             document.getElementById('loginFooter').classList.add('hidden');
             document.getElementById('registerFooter').classList.remove('hidden');
 
-            document.getElementById('authTitle').textContent = 'Daftar RfnStore';
+            document.getElementById('authTitle').textContent = 'Daftar RFNSTORE';
             document.getElementById('authSubtitle').textContent = 'Buat akun baru Anda';
         }
 
@@ -729,7 +729,7 @@
             document.getElementById('registerFooter').classList.add('hidden');
             document.getElementById('loginFooter').classList.remove('hidden');
 
-            document.getElementById('authTitle').textContent = 'Login RfnStore';
+            document.getElementById('authTitle').textContent = 'Login RFNSTORE';
             document.getElementById('authSubtitle').textContent = 'Masuk ke akun Anda';
         }
 
@@ -1239,10 +1239,10 @@
             const totalAmount = amount + uniqueCode;
             
             const bankAccounts = {
-                'bca': { name: 'BCA', number: '1234567890', holder: 'RfnStore' },
-                'mandiri': { name: 'Mandiri', number: '9876543210', holder: 'RfnStore' },
-                'bri': { name: 'BRI', number: '008801016082002', holder: 'RIFAN AGUSTIAN' },
-                'bni': { name: 'BNI', number: '1111222233', holder: 'RfnStore' }
+                //'bca': { name: 'BCA', number: '1234567890', holder: 'RFNSTORE' },
+                //'mandiri': { name: 'Mandiri', number: '9876543210', holder: 'RFNSTORE' },
+                'bri': { name: 'BRI', number: '617701027476538', holder: 'RIFAN AGUSTIAN' },
+                //'bni': { name: 'BNI', number: '1111222233', holder: 'RFNSTORE' }
             };
             
             const bank = bankAccounts[method];
@@ -1418,7 +1418,7 @@
         function confirmPaymentWhatsApp() {
             if (!currentPayment) return;
             
-            const message = `Halo Admin RfnStore,
+            const message = `Halo Admin RFNSTORE,
 
 Saya ingin konfirmasi pembayaran top up:
 
@@ -2043,5 +2043,5 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d53ef9255df97',t:'MTc1NjQ4MzkyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d7621d5cdfc2e',t:'MTc1NjQ4NTMyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
