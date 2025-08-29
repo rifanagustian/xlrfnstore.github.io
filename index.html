@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFNSTORE - Penjualan Kuota Online</title>
+    <title>RfnStore - Penjualan Kuota Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
@@ -13,6 +13,35 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .sidebar-mobile-hidden { transform: translateX(-100%); }
+            .sidebar-mobile-visible { transform: translateX(0); }
+            .main-content-mobile { margin-left: 0 !important; }
+            .mobile-overlay { display: block; }
+            .desktop-only { display: none; }
+            .mobile-only { display: block; }
+            
+            /* Mobile grid adjustments */
+            .mobile-grid-1 { grid-template-columns: 1fr; }
+            .mobile-grid-2 { grid-template-columns: repeat(2, 1fr); }
+            
+            /* Mobile text sizes */
+            .mobile-text-sm { font-size: 0.875rem; }
+            .mobile-text-xs { font-size: 0.75rem; }
+            
+            /* Mobile padding adjustments */
+            .mobile-p-4 { padding: 1rem; }
+            .mobile-p-3 { padding: 0.75rem; }
+            .mobile-px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+            .mobile-py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-only { display: none; }
+            .desktop-only { display: block; }
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
@@ -21,7 +50,7 @@
         <div class="bg-white rounded-2xl p-8 w-96 max-w-md mx-4 shadow-2xl">
             <div class="text-center mb-6">
                 <i class="fas fa-wifi text-4xl text-blue-600 mb-4"></i>
-                <h2 id="authTitle" class="text-2xl font-bold text-gray-800">Login RFNSTORE</h2>
+                <h2 id="authTitle" class="text-2xl font-bold text-gray-800">Login RfnStore</h2>
                 <p id="authSubtitle" class="text-gray-600 mt-2">Masuk ke akun Anda</p>
             </div>
             
@@ -94,13 +123,16 @@
 
     <!-- Main App Container -->
     <div id="mainApp" class="hidden">
+        <!-- Mobile Overlay -->
+        <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden mobile-overlay" onclick="closeMobileSidebar()"></div>
+        
         <!-- Sidebar -->
-        <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-xl z-40 sidebar-transition">
+        <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-xl z-40 sidebar-transition md:translate-x-0 -translate-x-full">
             <div class="p-6 border-b border-gray-200">
                 <div class="flex items-center space-x-3">
                     <i class="fas fa-wifi text-2xl text-blue-600"></i>
                     <div>
-                        <h1 class="text-xl font-bold text-gray-800">RFNSTORE</h1>
+                        <h1 class="text-xl font-bold text-gray-800">RfnStore</h1>
                         <p id="userRole" class="text-sm text-gray-600"></p>
                     </div>
                 </div>
@@ -138,62 +170,68 @@
         </div>
 
         <!-- Main Content -->
-        <div class="ml-64 min-h-screen">
+        <div class="md:ml-64 min-h-screen">
             <!-- Header -->
-            <header class="bg-white shadow-sm border-b border-gray-200 p-6">
+            <header class="bg-white shadow-sm border-b border-gray-200 p-4 md:p-6">
                 <div class="flex items-center justify-between">
-                    <h2 id="pageTitle" class="text-2xl font-bold text-gray-800">Dashboard</h2>
-                    <div class="flex items-center space-x-4">
-                        <div class="text-right">
+                    <div class="flex items-center space-x-3">
+                        <!-- Mobile Menu Button -->
+                        <button id="mobileMenuBtn" onclick="toggleMobileSidebar()" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                            <i class="fas fa-bars text-gray-600"></i>
+                        </button>
+                        <h2 id="pageTitle" class="text-xl md:text-2xl font-bold text-gray-800">Dashboard</h2>
+                    </div>
+                    <div class="flex items-center space-x-2 md:space-x-4">
+                        <div class="text-right hidden sm:block">
                             <p class="text-sm text-gray-600">Selamat datang,</p>
-                            <p id="currentUser" class="font-medium text-gray-800"></p>
+                            <p id="currentUser" class="font-medium text-gray-800 text-sm md:text-base"></p>
                         </div>
-                        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-user text-white"></i>
+                        <div class="w-8 h-8 md:w-10 md:h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white text-sm md:text-base"></i>
                         </div>
                     </div>
                 </div>
             </header>
 
             <!-- Content Area -->
-            <main class="p-6">
+            <main class="p-4 md:p-6">
                 <!-- Dashboard Section -->
                 <div id="dashboardSection" class="section fade-in">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+                        <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg card-hover">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-sm">Total Kuota</p>
-                                    <p id="totalQuota" class="text-2xl font-bold text-blue-600">12</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Total Kuota</p>
+                                    <p id="totalQuota" class="text-xl md:text-2xl font-bold text-blue-600">12</p>
                                 </div>
-                                <i class="fas fa-wifi text-3xl text-blue-600"></i>
+                                <i class="fas fa-wifi text-2xl md:text-3xl text-blue-600"></i>
                             </div>
                         </div>
                         
-                        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                        <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg card-hover">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-sm">Pesanan Saya</p>
-                                    <p id="myOrders" class="text-2xl font-bold text-green-600">0</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Pesanan Saya</p>
+                                    <p id="myOrders" class="text-xl md:text-2xl font-bold text-green-600">0</p>
                                 </div>
-                                <i class="fas fa-shopping-cart text-3xl text-green-600"></i>
+                                <i class="fas fa-shopping-cart text-2xl md:text-3xl text-green-600"></i>
                             </div>
                         </div>
                         
-                        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+                        <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg card-hover">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-sm">Saldo</p>
-                                    <p class="text-2xl font-bold text-purple-600 balance-display">Rp 50.000</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Saldo</p>
+                                    <p class="text-xl md:text-2xl font-bold text-purple-600 balance-display">Rp 50.000</p>
                                 </div>
-                                <i class="fas fa-wallet text-3xl text-purple-600"></i>
+                                <i class="fas fa-wallet text-2xl md:text-3xl text-purple-600"></i>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="bg-white rounded-xl p-6 shadow-lg">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Kuota Populer</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="popularQuota">
+                    <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg">
+                        <h3 class="text-base md:text-lg font-semibold text-gray-800 mb-4">Kuota Populer</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4" id="popularQuota">
                             <!-- Popular quota items will be inserted here -->
                         </div>
                     </div>
@@ -202,11 +240,11 @@
                 <!-- Products Section -->
                 <div id="productsSection" class="section hidden fade-in">
                     <div class="bg-white rounded-xl shadow-lg">
-                        <div class="p-6 border-b border-gray-200">
-                            <div class="flex items-center justify-between">
-                                <h3 class="text-lg font-semibold text-gray-800">Daftar Kuota Tersedia</h3>
-                                <div class="flex items-center space-x-4">
-                                    <select id="providerFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <div class="p-4 md:p-6 border-b border-gray-200">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                <h3 class="text-base md:text-lg font-semibold text-gray-800">Daftar Kuota Tersedia</h3>
+                                <div class="flex items-center space-x-2 md:space-x-4">
+                                    <select id="providerFilter" class="px-3 md:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
                                         <option value="">Semua Provider</option>
                                         <option value="Telkomsel">Telkomsel</option>
                                         <option value="Indosat">Indosat</option>
@@ -217,8 +255,8 @@
                             </div>
                         </div>
                         
-                        <div class="p-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="quotaList">
+                        <div class="p-4 md:p-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" id="quotaList">
                                 <!-- Quota items will be inserted here -->
                             </div>
                         </div>
@@ -245,30 +283,30 @@
 
                 <!-- Top Up Section -->
                 <div id="topupSection" class="section hidden fade-in">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
                         <!-- Top Up Form -->
                         <div class="bg-white rounded-xl shadow-lg">
-                            <div class="p-6 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-800">Top Up Saldo</h3>
-                                <p class="text-gray-600 text-sm mt-1">Isi saldo untuk membeli kuota</p>
+                            <div class="p-4 md:p-6 border-b border-gray-200">
+                                <h3 class="text-base md:text-lg font-semibold text-gray-800">Top Up Saldo</h3>
+                                <p class="text-gray-600 text-xs md:text-sm mt-1">Isi saldo untuk membeli kuota</p>
                             </div>
                             
-                            <div class="p-6">
+                            <div class="p-4 md:p-6">
                                 <form id="topupForm" class="space-y-4">
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Nominal</label>
-                                        <div class="grid grid-cols-2 gap-3 mb-4">
-                                            <button type="button" onclick="selectAmount(10000)" class="amount-btn border-2 border-gray-300 rounded-lg p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
-                                                <div class="font-medium">Rp 10.000</div>
+                                        <div class="grid grid-cols-2 gap-2 md:gap-3 mb-4">
+                                            <button type="button" onclick="selectAmount(10000)" class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
+                                                <div class="font-medium text-sm md:text-base">Rp 10.000</div>
                                             </button>
-                                            <button type="button" onclick="selectAmount(25000)" class="amount-btn border-2 border-gray-300 rounded-lg p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
-                                                <div class="font-medium">Rp 25.000</div>
+                                            <button type="button" onclick="selectAmount(25000)" class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
+                                                <div class="font-medium text-sm md:text-base">Rp 25.000</div>
                                             </button>
-                                            <button type="button" onclick="selectAmount(50000)" class="amount-btn border-2 border-gray-300 rounded-lg p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
-                                                <div class="font-medium">Rp 50.000</div>
+                                            <button type="button" onclick="selectAmount(50000)" class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
+                                                <div class="font-medium text-sm md:text-base">Rp 50.000</div>
                                             </button>
-                                            <button type="button" onclick="selectAmount(100000)" class="amount-btn border-2 border-gray-300 rounded-lg p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
-                                                <div class="font-medium">Rp 100.000</div>
+                                            <button type="button" onclick="selectAmount(100000)" class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
+                                                <div class="font-medium text-sm md:text-base">Rp 100.000</div>
                                             </button>
                                         </div>
                                         
@@ -366,35 +404,35 @@
 
                 <!-- Admin Top Up Management Section -->
                 <div id="topupAdminSection" class="section hidden fade-in">
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-4 md:mb-6">
                         <!-- Stats Cards -->
-                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-sm">Pending</p>
-                                    <p id="pendingTopupCount" class="text-2xl font-bold text-yellow-600">0</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Pending</p>
+                                    <p id="pendingTopupCount" class="text-xl md:text-2xl font-bold text-yellow-600">0</p>
                                 </div>
-                                <i class="fas fa-clock text-3xl text-yellow-600"></i>
+                                <i class="fas fa-clock text-2xl md:text-3xl text-yellow-600"></i>
                             </div>
                         </div>
                         
-                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-sm">Berhasil Hari Ini</p>
-                                    <p id="todaySuccessCount" class="text-2xl font-bold text-green-600">0</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Berhasil Hari Ini</p>
+                                    <p id="todaySuccessCount" class="text-xl md:text-2xl font-bold text-green-600">0</p>
                                 </div>
-                                <i class="fas fa-check-circle text-3xl text-green-600"></i>
+                                <i class="fas fa-check-circle text-2xl md:text-3xl text-green-600"></i>
                             </div>
                         </div>
                         
-                        <div class="bg-white rounded-xl p-6 shadow-lg">
+                        <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <p class="text-gray-600 text-sm">Total Hari Ini</p>
-                                    <p id="todayTotalAmount" class="text-2xl font-bold text-blue-600">Rp 0</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Total Hari Ini</p>
+                                    <p id="todayTotalAmount" class="text-lg md:text-2xl font-bold text-blue-600">Rp 0</p>
                                 </div>
-                                <i class="fas fa-money-bill-wave text-3xl text-blue-600"></i>
+                                <i class="fas fa-money-bill-wave text-2xl md:text-3xl text-blue-600"></i>
                             </div>
                         </div>
                     </div>
@@ -681,7 +719,7 @@
             document.getElementById('loginFooter').classList.add('hidden');
             document.getElementById('registerFooter').classList.remove('hidden');
 
-            document.getElementById('authTitle').textContent = 'Daftar RFNSTORE';
+            document.getElementById('authTitle').textContent = 'Daftar RfnStore';
             document.getElementById('authSubtitle').textContent = 'Buat akun baru Anda';
         }
 
@@ -691,7 +729,7 @@
             document.getElementById('registerFooter').classList.add('hidden');
             document.getElementById('loginFooter').classList.remove('hidden');
 
-            document.getElementById('authTitle').textContent = 'Login RFNSTORE';
+            document.getElementById('authTitle').textContent = 'Login RfnStore';
             document.getElementById('authSubtitle').textContent = 'Masuk ke akun Anda';
         }
 
@@ -871,18 +909,18 @@
         // Create quota card
         function createQuotaCard(quota, isPopular = false) {
             const card = document.createElement('div');
-            card.className = 'bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-xl card-hover';
+            card.className = 'bg-gradient-to-r from-blue-500 to-purple-600 text-white p-3 md:p-4 rounded-xl card-hover';
             
             card.innerHTML = `
-                <div class="flex items-center justify-between mb-3">
-                    <span class="text-sm font-medium bg-white bg-opacity-20 px-2 py-1 rounded-full">${quota.provider}</span>
-                    ${isPopular ? '<i class="fas fa-star text-yellow-300"></i>' : ''}
+                <div class="flex items-center justify-between mb-2 md:mb-3">
+                    <span class="text-xs md:text-sm font-medium bg-white bg-opacity-20 px-2 py-1 rounded-full">${quota.provider}</span>
+                    ${isPopular ? '<i class="fas fa-star text-yellow-300 text-sm md:text-base"></i>' : ''}
                 </div>
-                <h4 class="text-lg font-bold mb-2">${quota.quota}</h4>
-                <p class="text-sm opacity-90 mb-3">${quota.duration}</p>
+                <h4 class="text-base md:text-lg font-bold mb-1 md:mb-2">${quota.quota}</h4>
+                <p class="text-xs md:text-sm opacity-90 mb-2 md:mb-3">${quota.duration}</p>
                 <div class="flex items-center justify-between">
-                    <span class="text-xl font-bold">Rp ${quota.price.toLocaleString()}</span>
-                    ${userRole !== 'Administrator' ? `<button onclick="openPurchaseModal(${quota.id})" class="bg-white text-blue-600 px-3 py-1 rounded-lg text-sm font-medium hover:bg-gray-100 transition duration-200">Beli</button>` : ''}
+                    <span class="text-lg md:text-xl font-bold">Rp ${quota.price.toLocaleString()}</span>
+                    ${userRole !== 'Administrator' ? `<button onclick="openPurchaseModal(${quota.id})" class="bg-white text-blue-600 px-2 md:px-3 py-1 rounded-lg text-xs md:text-sm font-medium hover:bg-gray-100 transition duration-200">Beli</button>` : ''}
                 </div>
             `;
             
@@ -1201,10 +1239,10 @@
             const totalAmount = amount + uniqueCode;
             
             const bankAccounts = {
-                //'bca': { name: 'BCA', number: '1234567890', holder: 'RFNSTORE' },
-                //'mandiri': { name: 'Mandiri', number: '9876543210', holder: 'RFNSTORE' },
-                'bri': { name: 'BRI', number: ' 617701027476538', holder: 'RIFAN AGUSTIAN' },
-                //'bni': { name: 'BNI', number: '1111222233', holder: 'RFNSTORE' }
+                'bca': { name: 'BCA', number: '1234567890', holder: 'RfnStore' },
+                'mandiri': { name: 'Mandiri', number: '9876543210', holder: 'RfnStore' },
+                'bri': { name: 'BRI', number: '008801016082002', holder: 'RIFAN AGUSTIAN' },
+                'bni': { name: 'BNI', number: '1111222233', holder: 'RfnStore' }
             };
             
             const bank = bankAccounts[method];
@@ -1380,7 +1418,7 @@
         function confirmPaymentWhatsApp() {
             if (!currentPayment) return;
             
-            const message = `Halo Admin RFNSTORE,
+            const message = `Halo Admin RfnStore,
 
 Saya ingin konfirmasi pembayaran top up:
 
@@ -1398,7 +1436,7 @@ Atas Nama: ${currentPayment.bank.holder}
 Mohon diproses segera. Terima kasih! 🙏`;
 
             const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/628885252823?text=${encodedMessage}`;
+            const whatsappUrl = `https://wa.me/6281234567890?text=${encodedMessage}`;
             
             window.open(whatsappUrl, '_blank');
         }
@@ -1955,6 +1993,39 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
             }
         });
 
+        // Mobile sidebar functions
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                // Show sidebar
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                overlay.classList.remove('hidden');
+            } else {
+                // Hide sidebar
+                closeMobileSidebar();
+            }
+        }
+
+        function closeMobileSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('mobileOverlay');
+            
+            sidebar.classList.add('-translate-x-full');
+            sidebar.classList.remove('translate-x-0');
+            overlay.classList.add('hidden');
+        }
+
+        // Close mobile sidebar when clicking nav items
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.nav-item')) {
+                // Small delay to allow navigation to complete
+                setTimeout(closeMobileSidebar, 100);
+            }
+        });
+
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
             // Try to load existing session first
@@ -1972,5 +2043,5 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d2e73268cdf97',t:'MTc1NjQ4MjM4OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d53ef9255df97',t:'MTc1NjQ4MzkyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
