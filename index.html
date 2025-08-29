@@ -573,6 +573,51 @@
         </div>
     </div>
 
+    <!-- Edit Quota Modal -->
+    <div id="editQuotaModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 w-96 max-w-md mx-4 shadow-2xl">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-bold text-gray-800">Edit Kuota</h3>
+                <button onclick="closeEditQuotaModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <form id="editQuotaForm" class="space-y-4">
+                <input type="hidden" id="editQuotaId">
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Provider</label>
+                    <select id="editProvider" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="Telkomsel">Telkomsel</option>
+                        <option value="Indosat">Indosat</option>
+                        <option value="XL">XL</option>
+                        <option value="Tri">Tri</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Kuota</label>
+                    <input type="text" id="editQuota" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="contoh: 10GB">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Harga</label>
+                    <input type="number" id="editPrice" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="25000">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Masa Aktif</label>
+                    <input type="text" id="editDuration" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="30 hari">
+                </div>
+                
+                <button type="submit" class="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition duration-200 font-medium">
+                    <i class="fas fa-save mr-2"></i>Simpan Perubahan
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Purchase Modal -->
     <div id="purchaseModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-2xl p-8 w-96 max-w-md mx-4 shadow-2xl">
@@ -876,6 +921,8 @@
                 renderOrdersList();
             } else if (sectionName === 'topup') {
                 renderTopupHistory();
+                // Check for balance updates when viewing top up section
+                checkBalanceUpdates();
             } else if (sectionName === 'topupAdmin') {
                 renderAdminTopupSection();
             } else if (sectionName === 'manage') {
@@ -1141,6 +1188,22 @@
             document.getElementById('addQuotaForm').reset();
         }
 
+        // Edit quota modal functions
+        function showEditQuotaModal(quota) {
+            document.getElementById('editQuotaId').value = quota.id;
+            document.getElementById('editProvider').value = quota.provider;
+            document.getElementById('editQuota').value = quota.quota;
+            document.getElementById('editPrice').value = quota.price;
+            document.getElementById('editDuration').value = quota.duration;
+            
+            document.getElementById('editQuotaModal').classList.remove('hidden');
+        }
+
+        function closeEditQuotaModal() {
+            document.getElementById('editQuotaModal').classList.add('hidden');
+            document.getElementById('editQuotaForm').reset();
+        }
+
         // Add quota form
         document.getElementById('addQuotaForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1165,6 +1228,56 @@
             alert('Kuota berhasil ditambahkan!');
         });
 
+        // Edit quota form
+        document.getElementById('editQuotaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const quotaId = parseInt(document.getElementById('editQuotaId').value);
+            const quotaIndex = quotaData.findIndex(q => q.id === quotaId);
+            
+            if (quotaIndex === -1) {
+                alert('Kuota tidak ditemukan!');
+                return;
+            }
+            
+            // Validation
+            const provider = document.getElementById('editProvider').value;
+            const quota = document.getElementById('editQuota').value.trim();
+            const price = parseInt(document.getElementById('editPrice').value);
+            const duration = document.getElementById('editDuration').value.trim();
+            
+            if (!provider || !quota || !price || !duration) {
+                alert('Mohon lengkapi semua field!');
+                return;
+            }
+            
+            if (price <= 0) {
+                alert('Harga harus lebih dari 0!');
+                return;
+            }
+            
+            // Update quota data
+            quotaData[quotaIndex] = {
+                id: quotaId,
+                provider: provider,
+                quota: quota,
+                price: price,
+                duration: duration
+            };
+            
+            saveQuotaData(); // Save to localStorage
+            closeEditQuotaModal();
+            renderManageQuotaList();
+            updateDashboard();
+            
+            // Update product list if currently viewing
+            if (document.getElementById('productsSection').classList.contains('hidden') === false) {
+                renderQuotaList();
+            }
+            
+            alert('Kuota berhasil diperbarui!');
+        });
+
         // Delete quota
         function deleteQuota(quotaId) {
             if (confirm('Apakah Anda yakin ingin menghapus kuota ini?')) {
@@ -1185,9 +1298,16 @@
             }
         }
 
-        // Edit quota (simplified - just shows alert for demo)
+        // Edit quota functionality
         function editQuota(quotaId) {
-            alert('Fitur edit akan segera tersedia!');
+            const quota = quotaData.find(q => q.id === quotaId);
+            if (!quota) {
+                alert('Kuota tidak ditemukan!');
+                return;
+            }
+            
+            // Show edit modal
+            showEditQuotaModal(quota);
         }
 
         // Top Up Functions
@@ -1415,23 +1535,34 @@
         // Manual Top Up System - No automatic monitoring
 
         // WhatsApp confirmation function
-        function confirmPaymentWhatsApp() {
-            if (!currentPayment) return;
+        function confirmPaymentWhatsApp(topupId = null) {
+            let payment = currentPayment;
+            
+            // If topupId is provided, find the specific topup request
+            if (topupId) {
+                payment = allTopupRequests.find(req => req.id === topupId);
+                if (!payment) {
+                    alert('Data top up tidak ditemukan!');
+                    return;
+                }
+            }
+            
+            if (!payment) return;
             
             const message = `Halo Admin RFNSTORE,
 
 Saya ingin konfirmasi pembayaran top up:
 
-📋 *Kode Pembayaran:* ${currentPayment.id}
-👤 *Username:* ${currentUser}
-💰 *Nominal Top Up:* Rp ${currentPayment.amount.toLocaleString()}
-🔢 *Kode Unik:* Rp ${currentPayment.uniqueCode}
-💳 *Total Transfer:* Rp ${currentPayment.totalAmount.toLocaleString()}
+📋 *Kode Pembayaran:* ${payment.id}
+👤 *Username:* ${payment.username}
+💰 *Nominal Top Up:* Rp ${payment.amount.toLocaleString()}
+🔢 *Kode Unik:* Rp ${payment.uniqueCode}
+💳 *Total Transfer:* Rp ${payment.totalAmount.toLocaleString()}
 
 🏦 *Detail Transfer:*
-Bank: ${currentPayment.bank.name}
-No. Rekening: ${currentPayment.bank.number}
-Atas Nama: ${currentPayment.bank.holder}
+Bank: ${payment.bank.name}
+No. Rekening: ${payment.bank.number}
+Atas Nama: ${payment.bank.holder}
 
 Mohon diproses segera. Terima kasih! 🙏`;
 
@@ -1465,7 +1596,10 @@ Mohon diproses segera. Terima kasih! 🙏`;
         function renderTopupHistory() {
             const container = document.getElementById('topupHistory');
             
-            if (topupHistory.length === 0) {
+            // Get user's top up history from global storage
+            const userTopupHistory = allTopupRequests.filter(req => req.username === currentUser);
+            
+            if (userTopupHistory.length === 0) {
                 container.innerHTML = `
                     <div class="text-center py-8 text-gray-500">
                         <i class="fas fa-credit-card text-4xl mb-4"></i>
@@ -1478,7 +1612,7 @@ Mohon diproses segera. Terima kasih! 🙏`;
             container.innerHTML = '';
             
             // Sort by newest first
-            const sortedHistory = [...topupHistory].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            const sortedHistory = [...userTopupHistory].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             
             sortedHistory.forEach(topup => {
                 const statusColor = topup.status === 'success' ? 'green' : 
@@ -1486,11 +1620,15 @@ Mohon diproses segera. Terima kasih! 🙏`;
                                   topup.status === 'expired' ? 'gray' : 'red';
                 const statusText = topup.status === 'success' ? 'Berhasil' : 
                                  topup.status === 'pending' ? 'Menunggu' : 
-                                 topup.status === 'expired' ? 'Kedaluwarsa' : 'Gagal';
+                                 topup.status === 'expired' ? 'Kedaluwarsa' : 'Ditolak';
                 const failReason = topup.failReason || '';
                 
                 const topupCard = document.createElement('div');
-                topupCard.className = 'bg-gray-50 rounded-lg p-4 border border-gray-200';
+                topupCard.className = `bg-gray-50 rounded-lg p-4 border-2 ${
+                    topup.status === 'success' ? 'border-green-200 bg-green-50' : 
+                    topup.status === 'failed' ? 'border-red-200 bg-red-50' : 
+                    'border-gray-200'
+                }`;
                 
                 const paymentMethodDisplay = `
                     <div>
@@ -1511,10 +1649,34 @@ Mohon diproses segera. Terima kasih! 🙏`;
                     </div>
                 `;
                 
+                // Status message with details
+                let statusMessage = '';
+                if (topup.status === 'success') {
+                    statusMessage = `<div class="mt-2 p-2 bg-green-100 border border-green-200 rounded text-sm">
+                        <i class="fas fa-check-circle text-green-600 mr-1"></i>
+                        <strong>Saldo berhasil ditambahkan!</strong><br>
+                        Disetujui pada: ${new Date(topup.approvedAt).toLocaleString('id-ID')}<br>
+                        Oleh: ${topup.approvedBy}
+                    </div>`;
+                } else if (topup.status === 'failed') {
+                    statusMessage = `<div class="mt-2 p-2 bg-red-100 border border-red-200 rounded text-sm">
+                        <i class="fas fa-times-circle text-red-600 mr-1"></i>
+                        <strong>Top up ditolak</strong><br>
+                        Alasan: ${failReason}<br>
+                        Ditolak pada: ${new Date(topup.rejectedAt).toLocaleString('id-ID')}
+                    </div>`;
+                } else if (topup.status === 'pending') {
+                    statusMessage = `<div class="mt-2 p-2 bg-yellow-100 border border-yellow-200 rounded text-sm">
+                        <i class="fas fa-clock text-yellow-600 mr-1"></i>
+                        <strong>Menunggu konfirmasi admin</strong><br>
+                        Pastikan sudah transfer dan konfirmasi via WhatsApp
+                    </div>`;
+                }
+                
                 topupCard.innerHTML = `
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-sm font-medium text-gray-600">${topup.id}</span>
-                        <span class="text-sm px-2 py-1 bg-${statusColor}-100 text-${statusColor}-800 rounded-full">${statusText}</span>
+                        <span class="text-sm px-2 py-1 bg-${statusColor}-100 text-${statusColor}-800 rounded-full font-medium">${statusText}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 mb-3">
                         ${paymentMethodDisplay}
@@ -1526,10 +1688,11 @@ Mohon diproses segera. Terima kasih! 🙏`;
                     </div>
                     <div class="flex items-center justify-between border-t pt-3">
                         <span class="text-lg font-bold text-blue-600">Rp ${topup.totalAmount.toLocaleString()}</span>
-                        ${topup.status === 'pending' ? '<span class="text-xs text-gray-500">Menunggu pembayaran...</span>' : ''}
-                        ${topup.status === 'failed' || topup.status === 'expired' ? `<span class="text-xs text-red-500">${failReason}</span>` : ''}
-                        ${topup.status === 'success' ? '<span class="text-xs text-green-500">✓ Saldo sudah masuk</span>' : ''}
+                        ${topup.status === 'pending' ? `<button onclick="confirmPaymentWhatsApp('${topup.id}')" class="text-green-600 hover:text-green-800 text-sm font-medium">
+                            <i class="fab fa-whatsapp mr-1"></i>Konfirmasi Lagi
+                        </button>` : ''}
                     </div>
+                    ${statusMessage}
                 `;
                 
                 container.appendChild(topupCard);
@@ -1902,15 +2065,25 @@ Mohon diproses segera. Terima kasih! 🙏`;
                 topup.approvedAt = new Date();
                 topup.approvedBy = currentUser;
 
-                // Add balance to user (simulate)
-                // In real app, this would update the user's actual balance
-                console.log(`💰 Saldo ${topup.username} ditambah Rp ${topup.amount.toLocaleString()}`);
+                // Add balance to user's account
+                const userBalanceKey = 'userBalance_' + topup.username;
+                const currentBalance = parseInt(localStorage.getItem(userBalanceKey) || '0');
+                const newBalance = currentBalance + topup.amount;
+                localStorage.setItem(userBalanceKey, newBalance.toString());
+
+                console.log(`💰 Saldo ${topup.username} ditambah Rp ${topup.amount.toLocaleString()} (Total: Rp ${newBalance.toLocaleString()})`);
 
                 // Save changes
                 saveAllTopupRequests();
 
                 // Refresh displays
                 renderAdminTopupSection();
+
+                // If the approved user is currently logged in, update their balance display
+                if (topup.username === currentUser) {
+                    userBalance = newBalance;
+                    updateDashboard();
+                }
 
                 alert(`Top up berhasil disetujui! Saldo ${topup.username} telah ditambah Rp ${topup.amount.toLocaleString()}`);
             }
@@ -2026,6 +2199,55 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
             }
         });
 
+        // Check for balance updates
+        function checkBalanceUpdates() {
+            if (!currentUser) return;
+            
+            // Reload user balance from localStorage
+            const savedBalance = localStorage.getItem('userBalance_' + currentUser);
+            if (savedBalance) {
+                const newBalance = parseInt(savedBalance);
+                if (newBalance !== userBalance) {
+                    userBalance = newBalance;
+                    updateDashboard();
+                    
+                    // Show notification if balance increased
+                    if (newBalance > userBalance) {
+                        const increase = newBalance - userBalance;
+                        showBalanceNotification(`Saldo Anda bertambah Rp ${increase.toLocaleString()}!`);
+                    }
+                }
+            }
+        }
+
+        // Show balance notification
+        function showBalanceNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Hide notification after 5 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 5000);
+        }
+
         // Initialize app
         document.addEventListener('DOMContentLoaded', function() {
             // Try to load existing session first
@@ -2041,7 +2263,12 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
             if (userRole === 'Administrator') {
                 updateAdminTopupBadge();
             }
+            
+            // Set up periodic balance check for logged in users
+            if (currentUser) {
+                setInterval(checkBalanceUpdates, 5000); // Check every 5 seconds
+            }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976d7621d5cdfc2e',t:'MTc1NjQ4NTMyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976da698a1d2df97',t:'MTc1NjQ4NzMxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
