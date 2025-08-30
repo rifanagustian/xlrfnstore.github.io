@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,42 +9,109 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <style>
-        .sidebar-transition { transition: transform 0.3s ease-in-out; }
-        .fade-in { animation: fadeIn 0.3s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
-        
+        .sidebar-transition {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
         /* Mobile Responsive Styles */
         @media (max-width: 768px) {
-            .sidebar-mobile-hidden { transform: translateX(-100%); }
-            .sidebar-mobile-visible { transform: translateX(0); }
-            .main-content-mobile { margin-left: 0 !important; }
-            .mobile-overlay { display: block; }
-            .desktop-only { display: none; }
-            .mobile-only { display: block; }
-            
+            .sidebar-mobile-hidden {
+                transform: translateX(-100%);
+            }
+
+            .sidebar-mobile-visible {
+                transform: translateX(0);
+            }
+
+            .main-content-mobile {
+                margin-left: 0 !important;
+            }
+
+            .mobile-overlay {
+                display: block;
+            }
+
+            .desktop-only {
+                display: none;
+            }
+
+            .mobile-only {
+                display: block;
+            }
+
             /* Mobile grid adjustments */
-            .mobile-grid-1 { grid-template-columns: 1fr; }
-            .mobile-grid-2 { grid-template-columns: repeat(2, 1fr); }
-            
+            .mobile-grid-1 {
+                grid-template-columns: 1fr;
+            }
+
+            .mobile-grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             /* Mobile text sizes */
-            .mobile-text-sm { font-size: 0.875rem; }
-            .mobile-text-xs { font-size: 0.75rem; }
-            
+            .mobile-text-sm {
+                font-size: 0.875rem;
+            }
+
+            .mobile-text-xs {
+                font-size: 0.75rem;
+            }
+
             /* Mobile padding adjustments */
-            .mobile-p-4 { padding: 1rem; }
-            .mobile-p-3 { padding: 0.75rem; }
-            .mobile-px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
-            .mobile-py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+            .mobile-p-4 {
+                padding: 1rem;
+            }
+
+            .mobile-p-3 {
+                padding: 0.75rem;
+            }
+
+            .mobile-px-3 {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+
+            .mobile-py-2 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
         }
-        
+
         @media (min-width: 769px) {
-            .mobile-only { display: none; }
-            .desktop-only { display: block; }
+            .mobile-only {
+                display: none;
+            }
+
+            .desktop-only {
+                display: block;
+            }
         }
     </style>
 </head>
+
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
     <!-- Login Modal -->
     <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -53,20 +121,25 @@
                 <h2 id="authTitle" class="text-2xl font-bold text-gray-800">Login RFNSTORE</h2>
                 <p id="authSubtitle" class="text-gray-600 mt-2">Masuk ke akun Anda</p>
             </div>
-            
+
             <!-- Login Form -->
             <form id="loginForm" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
-                    <input type="text" id="username" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan username">
+                    <input type="text" id="username"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Masukkan username">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                    <input type="password" id="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan password">
+                    <input type="password" id="password"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Masukkan password">
                 </div>
-                
-                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium">
+
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium">
                     <i class="fas fa-sign-in-alt mr-2"></i>Masuk
                 </button>
             </form>
@@ -75,34 +148,45 @@
             <form id="registerForm" class="space-y-4 hidden">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
-                    <input type="text" id="regUsername" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Pilih username">
+                    <input type="text" id="regUsername"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Pilih username">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                    <input type="email" id="regEmail" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Masukkan email">
+                    <input type="email" id="regEmail"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Masukkan email">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
-                    <input type="tel" id="regPhone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="08xxxxxxxxxx">
+                    <input type="tel" id="regPhone"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="08xxxxxxxxxx">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                    <input type="password" id="regPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Buat password">
+                    <input type="password" id="regPassword"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Buat password">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Konfirmasi Password</label>
-                    <input type="password" id="regConfirmPassword" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Ulangi password">
+                    <input type="password" id="regConfirmPassword"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Ulangi password">
                 </div>
-                
-                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium">
+
+                <button type="submit"
+                    class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium">
                     <i class="fas fa-user-plus mr-2"></i>Daftar
                 </button>
             </form>
-            
+
             <div class="mt-6 text-center">
                 <div id="loginFooter">
                     <p class="text-sm text-gray-600 mb-2">Belum punya akun?</p>
@@ -110,7 +194,7 @@
                         Daftar Sekarang
                     </button>
                 </div>
-                
+
                 <div id="registerFooter" class="hidden">
                     <p class="text-sm text-gray-600 mb-2">Sudah punya akun?</p>
                     <button onclick="showLoginForm()" class="text-blue-600 hover:text-blue-800 font-medium text-sm">
@@ -124,10 +208,12 @@
     <!-- Main App Container -->
     <div id="mainApp" class="hidden">
         <!-- Mobile Overlay -->
-        <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden mobile-overlay" onclick="closeMobileSidebar()"></div>
-        
+        <div id="mobileOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden mobile-overlay"
+            onclick="closeMobileSidebar()"></div>
+
         <!-- Sidebar -->
-        <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white shadow-xl z-40 sidebar-transition md:translate-x-0 -translate-x-full">
+        <div id="sidebar"
+            class="fixed left-0 top-0 h-full w-64 bg-white shadow-xl z-40 sidebar-transition md:translate-x-0 -translate-x-full">
             <div class="p-6 border-b border-gray-200">
                 <div class="flex items-center space-x-3">
                     <i class="fas fa-wifi text-2xl text-blue-600"></i>
@@ -137,33 +223,45 @@
                     </div>
                 </div>
             </div>
-            
+
             <nav class="mt-6">
-                <a href="#" onclick="showSection('dashboard')" class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                <a href="#" onclick="showSection('dashboard')"
+                    class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                     <i class="fas fa-home mr-3"></i>Dashboard
                 </a>
-                <a href="#" onclick="showSection('products')" class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                <a href="#" onclick="showSection('products')"
+                    class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                     <i class="fas fa-list mr-3"></i>Daftar Kuota
                 </a>
-                <a href="#" onclick="showSection('orders')" class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                <a href="#" onclick="showSection('orders')"
+                    class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                     <i class="fas fa-shopping-cart mr-3"></i>Pesanan Saya
                 </a>
-                <a href="#" onclick="showSection('topup')" class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                <a href="#" onclick="showSection('topup')"
+                    class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                     <i class="fas fa-credit-card mr-3"></i>Top Up Saldo
                 </a>
                 <div id="adminMenu" class="hidden">
-                    <a href="#" onclick="showSection('manage')" class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                    <a href="#" onclick="showSection('manage')"
+                        class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                         <i class="fas fa-cog mr-3"></i>Kelola Kuota
                     </a>
-                    <a href="#" onclick="showSection('topupAdmin')" class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                    <a href="#" onclick="showSection('users')"
+                        class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
+                        <i class="fas fa-users mr-3"></i>Kelola User
+                    </a>
+                    <a href="#" onclick="showSection('topupAdmin')"
+                        class="nav-item flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition duration-200">
                         <i class="fas fa-money-check-alt mr-3"></i>Konfirmasi Top Up
-                        <span id="pendingTopupBadge" class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full hidden">0</span>
+                        <span id="pendingTopupBadge"
+                            class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full hidden">0</span>
                     </a>
                 </div>
             </nav>
-            
+
             <div class="absolute bottom-6 left-6 right-6">
-                <button onclick="logout()" class="w-full flex items-center justify-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200">
+                <button onclick="logout()"
+                    class="w-full flex items-center justify-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200">
                     <i class="fas fa-sign-out-alt mr-2"></i>Logout
                 </button>
             </div>
@@ -176,7 +274,8 @@
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-3">
                         <!-- Mobile Menu Button -->
-                        <button id="mobileMenuBtn" onclick="toggleMobileSidebar()" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                        <button id="mobileMenuBtn" onclick="toggleMobileSidebar()"
+                            class="md:hidden p-2 rounded-lg hover:bg-gray-100">
                             <i class="fas fa-bars text-gray-600"></i>
                         </button>
                         <h2 id="pageTitle" class="text-xl md:text-2xl font-bold text-gray-800">Dashboard</h2>
@@ -207,7 +306,7 @@
                                 <i class="fas fa-wifi text-2xl md:text-3xl text-blue-600"></i>
                             </div>
                         </div>
-                        
+
                         <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg card-hover">
                             <div class="flex items-center justify-between">
                                 <div>
@@ -217,7 +316,7 @@
                                 <i class="fas fa-shopping-cart text-2xl md:text-3xl text-green-600"></i>
                             </div>
                         </div>
-                        
+
                         <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg card-hover">
                             <div class="flex items-center justify-between">
                                 <div>
@@ -228,7 +327,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg">
                         <h3 class="text-base md:text-lg font-semibold text-gray-800 mb-4">Kuota Populer</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4" id="popularQuota">
@@ -244,7 +343,8 @@
                             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                                 <h3 class="text-base md:text-lg font-semibold text-gray-800">Daftar Kuota Tersedia</h3>
                                 <div class="flex items-center space-x-2 md:space-x-4">
-                                    <select id="providerFilter" class="px-3 md:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
+                                    <select id="providerFilter"
+                                        class="px-3 md:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm md:text-base">
                                         <option value="">Semua Provider</option>
                                         <option value="Telkomsel">Telkomsel</option>
                                         <option value="Indosat">Indosat</option>
@@ -254,7 +354,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="p-4 md:p-6">
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6" id="quotaList">
                                 <!-- Quota items will be inserted here -->
@@ -269,7 +369,7 @@
                         <div class="p-6 border-b border-gray-200">
                             <h3 class="text-lg font-semibold text-gray-800">Riwayat Pesanan</h3>
                         </div>
-                        
+
                         <div class="p-6">
                             <div id="ordersList" class="space-y-4">
                                 <div class="text-center py-8 text-gray-500">
@@ -290,107 +390,132 @@
                                 <h3 class="text-base md:text-lg font-semibold text-gray-800">Top Up Saldo</h3>
                                 <p class="text-gray-600 text-xs md:text-sm mt-1">Isi saldo untuk membeli kuota</p>
                             </div>
-                            
+
                             <div class="p-4 md:p-6">
                                 <form id="topupForm" class="space-y-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Nominal</label>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Pilih
+                                            Nominal</label>
                                         <div class="grid grid-cols-2 gap-2 md:gap-3 mb-4">
-                                            <button type="button" onclick="selectAmount(10000)" class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
+                                            <button type="button" onclick="selectAmount(10000)"
+                                                class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
                                                 <div class="font-medium text-sm md:text-base">Rp 10.000</div>
                                             </button>
-                                            <button type="button" onclick="selectAmount(25000)" class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
+                                            <button type="button" onclick="selectAmount(25000)"
+                                                class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
                                                 <div class="font-medium text-sm md:text-base">Rp 25.000</div>
                                             </button>
-                                            <button type="button" onclick="selectAmount(50000)" class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
+                                            <button type="button" onclick="selectAmount(50000)"
+                                                class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
                                                 <div class="font-medium text-sm md:text-base">Rp 50.000</div>
                                             </button>
-                                            <button type="button" onclick="selectAmount(100000)" class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
+                                            <button type="button" onclick="selectAmount(100000)"
+                                                class="amount-btn border-2 border-gray-300 rounded-lg p-2 md:p-3 text-center hover:border-blue-500 hover:bg-blue-50 transition duration-200">
                                                 <div class="font-medium text-sm md:text-base">Rp 100.000</div>
                                             </button>
                                         </div>
-                                        
+
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Atau masukkan nominal lain</label>
-                                            <input type="number" id="customAmount" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="Minimal Rp 10.000" min="10000">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Atau masukkan
+                                                nominal lain</label>
+                                            <input type="number" id="customAmount"
+                                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                                placeholder="Minimal Rp 10.000" min="10000">
                                         </div>
                                     </div>
-                                    
+
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Metode Pembayaran</label>
-                                        <select id="paymentMethod" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Metode
+                                            Pembayaran</label>
+                                        <select id="paymentMethod"
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                                             <option value="bri">Transfer Bank BRI - RIFAN AGUSTIAN (Recommended)</option>
-                                            <option value="bca">Transfer Bank BCA</option>
-                                            <option value="mandiri">Transfer Bank Mandiri</option>
-                                            <option value="bni">Transfer Bank BNI</option>
+                                            <!-- <option value="bca">Transfer Bank BCA</option> -->
+                                            <!-- <option value="mandiri">Transfer Bank Mandiri</option> -->
+                                            <!-- <option value="bni">Transfer Bank BNI</option> -->
                                         </select>
                                     </div>
-                                    
-                                    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium">
+
+                                    <button type="submit"
+                                        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium">
                                         <i class="fas fa-credit-card mr-2"></i>Buat Kode Pembayaran
                                     </button>
                                 </form>
                             </div>
                         </div>
-                        
+
                         <!-- Payment Instructions -->
                         <div class="bg-white rounded-xl shadow-lg">
                             <div class="p-6 border-b border-gray-200">
                                 <h3 class="text-lg font-semibold text-gray-800">Cara Top Up</h3>
                             </div>
-                            
+
                             <div class="p-6">
                                 <div class="space-y-4">
                                     <div class="flex items-start space-x-3">
-                                        <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">1</div>
+                                        <div
+                                            class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+                                            1</div>
                                         <div>
                                             <p class="font-medium text-gray-800">Pilih Nominal</p>
-                                            <p class="text-sm text-gray-600">Pilih atau masukkan nominal yang ingin di top up</p>
+                                            <p class="text-sm text-gray-600">Pilih atau masukkan nominal yang ingin di
+                                                top up</p>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="flex items-start space-x-3">
-                                        <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">2</div>
+                                        <div
+                                            class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+                                            2</div>
                                         <div>
                                             <p class="font-medium text-gray-800">Pilih Bank</p>
-                                            <p class="text-sm text-gray-600">Pilih bank yang akan digunakan untuk transfer</p>
+                                            <p class="text-sm text-gray-600">Pilih bank yang akan digunakan untuk
+                                                transfer</p>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="flex items-start space-x-3">
-                                        <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">3</div>
+                                        <div
+                                            class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+                                            3</div>
                                         <div>
                                             <p class="font-medium text-gray-800">Transfer Sesuai Kode</p>
-                                            <p class="text-sm text-gray-600">Transfer sesuai nominal + kode unik yang diberikan</p>
+                                            <p class="text-sm text-gray-600">Transfer sesuai nominal + kode unik yang
+                                                diberikan</p>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="flex items-start space-x-3">
-                                        <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">4</div>
+                                        <div
+                                            class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-medium">
+                                            4</div>
                                         <div>
                                             <p class="font-medium text-gray-800">Konfirmasi via WhatsApp</p>
-                                            <p class="text-sm text-gray-600">Kirim bukti transfer ke admin untuk diproses manual</p>
+                                            <p class="text-sm text-gray-600">Kirim bukti transfer ke admin untuk
+                                                diproses manual</p>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-exclamation-triangle text-yellow-600"></i>
                                         <p class="text-sm font-medium text-yellow-800">Penting!</p>
                                     </div>
-                                    <p class="text-sm text-yellow-700 mt-1">Transfer harus sesuai dengan nominal + kode unik yang diberikan. Setelah transfer, wajib konfirmasi via WhatsApp untuk proses manual.</p>
+                                    <p class="text-sm text-yellow-700 mt-1">Transfer harus sesuai dengan nominal + kode
+                                        unik yang diberikan. Setelah transfer, wajib konfirmasi via WhatsApp untuk
+                                        proses manual.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Top Up History -->
                     <div class="mt-6 bg-white rounded-xl shadow-lg">
                         <div class="p-6 border-b border-gray-200">
                             <h3 class="text-lg font-semibold text-gray-800">Riwayat Top Up</h3>
                         </div>
-                        
+
                         <div class="p-6">
                             <div id="topupHistory" class="space-y-4">
                                 <div class="text-center py-8 text-gray-500">
@@ -410,12 +535,13 @@
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-gray-600 text-xs md:text-sm">Pending</p>
-                                    <p id="pendingTopupCount" class="text-xl md:text-2xl font-bold text-yellow-600">0</p>
+                                    <p id="pendingTopupCount" class="text-xl md:text-2xl font-bold text-yellow-600">0
+                                    </p>
                                 </div>
                                 <i class="fas fa-clock text-2xl md:text-3xl text-yellow-600"></i>
                             </div>
                         </div>
-                        
+
                         <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
@@ -425,18 +551,19 @@
                                 <i class="fas fa-check-circle text-2xl md:text-3xl text-green-600"></i>
                             </div>
                         </div>
-                        
+
                         <div class="bg-white rounded-xl p-4 md:p-6 shadow-lg">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <p class="text-gray-600 text-xs md:text-sm">Total Hari Ini</p>
-                                    <p id="todayTotalAmount" class="text-lg md:text-2xl font-bold text-blue-600">Rp 0</p>
+                                    <p id="todayTotalAmount" class="text-lg md:text-2xl font-bold text-blue-600">Rp 0
+                                    </p>
                                 </div>
                                 <i class="fas fa-money-bill-wave text-2xl md:text-3xl text-blue-600"></i>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Pending Top Ups -->
                     <div class="bg-white rounded-xl shadow-lg mb-6">
                         <div class="p-6 border-b border-gray-200">
@@ -447,21 +574,22 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div class="p-6">
                             <div id="pendingTopupList" class="space-y-4">
                                 <!-- Pending top ups will be inserted here -->
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- All Top Up History -->
                     <div class="bg-white rounded-xl shadow-lg">
                         <div class="p-6 border-b border-gray-200">
                             <div class="flex items-center justify-between">
                                 <h3 class="text-lg font-semibold text-gray-800">Riwayat Semua Top Up</h3>
                                 <div class="flex items-center space-x-3">
-                                    <select id="statusFilter" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                    <select id="statusFilter"
+                                        class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
                                         <option value="">Semua Status</option>
                                         <option value="pending">Pending</option>
                                         <option value="success">Berhasil</option>
@@ -477,10 +605,46 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="p-6">
                             <div id="allTopupHistory" class="space-y-4">
                                 <!-- All top up history will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Users Section -->
+                <div id="usersSection" class="section hidden fade-in">
+                    <div class="bg-white rounded-xl shadow-lg">
+                        <div class="p-6 border-b border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-lg font-semibold text-gray-800">Kelola User</h3>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-sm text-gray-600">Total User: <span id="totalUsersCount"
+                                            class="font-bold text-blue-600">0</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr class="border-b border-gray-200">
+                                            <th class="text-left py-3 px-4 font-medium text-gray-700">Username</th>
+                                            <th class="text-left py-3 px-4 font-medium text-gray-700">Password</th>
+                                            <th class="text-left py-3 px-4 font-medium text-gray-700">Email</th>
+                                            <th class="text-left py-3 px-4 font-medium text-gray-700">No. HP</th>
+                                            <th class="text-left py-3 px-4 font-medium text-gray-700">Role</th>
+                                            <th class="text-left py-3 px-4 font-medium text-gray-700">Saldo</th>
+                                            <th class="text-left py-3 px-4 font-medium text-gray-700">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="usersList">
+                                        <!-- Users will be inserted here -->
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -493,23 +657,27 @@
                             <div class="flex items-center justify-between">
                                 <h3 class="text-lg font-semibold text-gray-800">Kelola Kuota</h3>
                                 <div class="flex items-center space-x-3">
-                                    <button id="deleteSelectedBtn" onclick="deleteSelectedQuotas()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200 hidden">
-                                        <i class="fas fa-trash mr-2"></i>Hapus Terpilih (<span id="selectedCount">0</span>)
+                                    <button id="deleteSelectedBtn" onclick="deleteSelectedQuotas()"
+                                        class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200 hidden">
+                                        <i class="fas fa-trash mr-2"></i>Hapus Terpilih (<span
+                                            id="selectedCount">0</span>)
                                     </button>
-                                    <button onclick="showAddQuotaModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                                    <button onclick="showAddQuotaModal()"
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
                                         <i class="fas fa-plus mr-2"></i>Tambah Kuota
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="p-6">
                             <div class="overflow-x-auto">
                                 <table class="w-full">
                                     <thead>
                                         <tr class="border-b border-gray-200">
                                             <th class="text-left py-3 px-4 font-medium text-gray-700 w-12">
-                                                <input type="checkbox" id="selectAllQuotas" onchange="toggleSelectAll()" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                                <input type="checkbox" id="selectAllQuotas" onchange="toggleSelectAll()"
+                                                    class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
                                             </th>
                                             <th class="text-left py-3 px-4 font-medium text-gray-700">Provider</th>
                                             <th class="text-left py-3 px-4 font-medium text-gray-700">Kuota</th>
@@ -539,35 +707,105 @@
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-            
+
             <form id="addQuotaForm" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Provider</label>
-                    <select id="newProvider" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <select id="newProvider"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                         <option value="Telkomsel">Telkomsel</option>
                         <option value="Indosat">Indosat</option>
                         <option value="XL">XL</option>
                         <option value="Tri">Tri</option>
                     </select>
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Kuota</label>
-                    <input type="text" id="newQuota" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="contoh: 10GB">
+                    <input type="text" id="newQuota"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="contoh: 10GB">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Harga</label>
-                    <input type="number" id="newPrice" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="25000">
+                    <input type="number" id="newPrice"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="25000">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Masa Aktif</label>
-                    <input type="text" id="newDuration" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="30 hari">
+                    <input type="text" id="newDuration"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="30 hari">
                 </div>
-                
-                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium">
+
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium">
                     <i class="fas fa-plus mr-2"></i>Tambah Kuota
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="editUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 w-96 max-w-md mx-4 shadow-2xl">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-bold text-gray-800">Edit User</h3>
+                <button onclick="closeEditUserModal()" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+
+            <form id="editUserForm" class="space-y-4">
+                <input type="hidden" id="editUserIndex">
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                    <input type="text" id="editUserUsername"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        readonly>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="text" id="editUserPassword"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input type="email" id="editUserEmail"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">No. HP</label>
+                    <input type="tel" id="editUserPhone"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                    <select id="editUserRole"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Saldo</label>
+                    <input type="number" id="editUserBalance"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        min="0">
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition duration-200 font-medium">
+                    <i class="fas fa-save mr-2"></i>Simpan Perubahan
                 </button>
             </form>
         </div>
@@ -582,36 +820,44 @@
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-            
+
             <form id="editQuotaForm" class="space-y-4">
                 <input type="hidden" id="editQuotaId">
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Provider</label>
-                    <select id="editProvider" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <select id="editProvider"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
                         <option value="Telkomsel">Telkomsel</option>
                         <option value="Indosat">Indosat</option>
                         <option value="XL">XL</option>
                         <option value="Tri">Tri</option>
                     </select>
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Kuota</label>
-                    <input type="text" id="editQuota" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="contoh: 10GB">
+                    <input type="text" id="editQuota"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="contoh: 10GB">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Harga</label>
-                    <input type="number" id="editPrice" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="25000">
+                    <input type="number" id="editPrice"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="25000">
                 </div>
-                
+
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Masa Aktif</label>
-                    <input type="text" id="editDuration" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="30 hari">
+                    <input type="text" id="editDuration"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="30 hari">
                 </div>
-                
-                <button type="submit" class="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition duration-200 font-medium">
+
+                <button type="submit"
+                    class="w-full bg-orange-600 text-white py-3 rounded-lg hover:bg-orange-700 transition duration-200 font-medium">
                     <i class="fas fa-save mr-2"></i>Simpan Perubahan
                 </button>
             </form>
@@ -627,18 +873,21 @@
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-            
+
             <div id="purchaseDetails" class="mb-6">
                 <!-- Purchase details will be inserted here -->
             </div>
-            
+
             <form id="purchaseForm" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Nomor HP</label>
-                    <input type="tel" id="phoneNumber" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" placeholder="08xxxxxxxxxx">
+                    <input type="tel" id="phoneNumber"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                        placeholder="08xxxxxxxxxx">
                 </div>
-                
-                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium">
+
+                <button type="submit"
+                    class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium">
                     <i class="fas fa-shopping-cart mr-2"></i>Beli Sekarang
                 </button>
             </form>
@@ -654,11 +903,11 @@
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-            
+
             <div id="paymentDetails" class="mb-6">
                 <!-- Payment details will be inserted here -->
             </div>
-            
+
             <div class="space-y-4">
                 <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
                     <div class="flex items-center space-x-2 mb-2">
@@ -667,21 +916,24 @@
                     </div>
                     <p id="paymentTimer" class="text-lg font-bold text-red-600">23:59:45</p>
                 </div>
-                
+
                 <div id="bankTransferButtons">
-                    <button onclick="copyAccountNumber()" class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium mb-2">
+                    <button onclick="copyAccountNumber()"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-200 font-medium mb-2">
                         <i class="fas fa-copy mr-2"></i>Salin Nomor Rekening
                     </button>
-                    
-                    <button onclick="copyAmount()" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium mb-3">
+
+                    <button onclick="copyAmount()"
+                        class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200 font-medium mb-3">
                         <i class="fas fa-copy mr-2"></i>Salin Nominal Transfer
                     </button>
-                    
-                    <button onclick="confirmPaymentWhatsApp()" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-lg hover:from-green-600 hover:to-green-700 transition duration-200 font-medium">
+
+                    <button onclick="confirmPaymentWhatsApp()"
+                        class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-lg hover:from-green-600 hover:to-green-700 transition duration-200 font-medium">
                         <i class="fab fa-whatsapp mr-2"></i>Konfirmasi via WhatsApp
                     </button>
                 </div>
-                
+
                 <div id="qrisButtons" class="hidden">
                     <!-- QRIS buttons removed -->
                 </div>
@@ -693,39 +945,26 @@
         // Global variables
         let currentUser = null;
         let userRole = null;
-        
+
         // Load registered users from localStorage or use default
         let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [
             { username: 'admin', password: 'admin123', role: 'admin', email: 'admin@RFNSTORE.com', phone: '081234567890' },
             { username: 'rifan16', password: '16082002', role: 'admin', email: 'rifan16@example.com', phone: '081234567891' }
         ];
-        
+
         // Save registered users to localStorage
         function saveRegisteredUsers() {
             localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
         }
-        
-        // Load quota data from localStorage or use default
-        let quotaData = JSON.parse(localStorage.getItem('quotaData')) || [
-            { id: 1, provider: 'Telkomsel', quota: '10GB', price: 25000, duration: '30 hari' },
-            { id: 2, provider: 'Telkomsel', quota: '20GB', price: 45000, duration: '30 hari' },
-            { id: 3, provider: 'Indosat', quota: '15GB', price: 30000, duration: '30 hari' },
-            { id: 4, provider: 'XL', quota: '12GB', price: 28000, duration: '30 hari' },
-            { id: 5, provider: 'Tri', quota: '25GB', price: 35000, duration: '30 hari' },
-            { id: 6, provider: 'Telkomsel', quota: '5GB', price: 15000, duration: '7 hari' },
-            { id: 7, provider: 'Indosat', quota: '8GB', price: 20000, duration: '15 hari' },
-            { id: 8, provider: 'XL', quota: '30GB', price: 50000, duration: '30 hari' },
-            { id: 9, provider: 'Tri', quota: '50GB', price: 65000, duration: '30 hari' },
-            { id: 10, provider: 'Telkomsel', quota: '3GB', price: 12000, duration: '3 hari' },
-            { id: 11, provider: 'Indosat', quota: '40GB', price: 55000, duration: '30 hari' },
-            { id: 12, provider: 'XL', quota: '6GB', price: 18000, duration: '7 hari' }
-        ];
-        
+
+        // Load quota data from localStorage or use default (only for admin)
+        let quotaData = JSON.parse(localStorage.getItem('quotaData')) || [];
+
         // Save quota data to localStorage
         function saveQuotaData() {
             localStorage.setItem('quotaData', JSON.stringify(quotaData));
         }
-        
+
         // Save all top up requests to localStorage
         function saveAllTopupRequests() {
             localStorage.setItem('allTopupRequests', JSON.stringify(allTopupRequests));
@@ -779,42 +1018,42 @@
         }
 
         // Register functionality
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const username = document.getElementById('regUsername').value;
             const email = document.getElementById('regEmail').value;
             const phone = document.getElementById('regPhone').value;
             const password = document.getElementById('regPassword').value;
             const confirmPassword = document.getElementById('regConfirmPassword').value;
-            
+
             // Validation
             if (!username || !email || !phone || !password || !confirmPassword) {
                 alert('Mohon lengkapi semua field!');
                 return;
             }
-            
+
             if (password !== confirmPassword) {
                 alert('Password dan konfirmasi password tidak sama!');
                 return;
             }
-            
+
             if (password.length < 6) {
                 alert('Password minimal 6 karakter!');
                 return;
             }
-            
+
             // Check if username already exists
             if (registeredUsers.find(user => user.username === username)) {
                 alert('Username sudah digunakan! Pilih username lain.');
                 return;
             }
-            
+
             // Check if email already exists
             if (registeredUsers.find(user => user.email === email)) {
                 alert('Email sudah terdaftar! Gunakan email lain.');
                 return;
             }
-            
+
             // Add new user
             const newUser = {
                 username: username,
@@ -823,45 +1062,45 @@
                 email: email,
                 phone: phone
             };
-            
+
             registeredUsers.push(newUser);
             saveRegisteredUsers(); // Save to localStorage
-            
+
             alert('Registrasi berhasil! Silakan login dengan akun baru Anda.');
-            
+
             // Clear form and switch to login
             document.getElementById('registerForm').reset();
             showLoginForm();
         });
 
         // Login functionality
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            
+
             const user = registeredUsers.find(u => u.username === username && u.password === password);
-            
+
             if (user) {
                 currentUser = user.username;
                 userRole = user.role === 'admin' ? 'Administrator' : 'User';
-                
+
                 // Save session to localStorage
                 saveUserSession();
-                
+
                 document.getElementById('loginModal').classList.add('hidden');
                 document.getElementById('mainApp').classList.remove('hidden');
-                
+
                 document.getElementById('currentUser').textContent = currentUser;
                 document.getElementById('userRole').textContent = userRole;
-                
+
                 if (userRole === 'Administrator') {
                     document.getElementById('adminMenu').classList.remove('hidden');
                 }
-                
+
                 // Load user's balance
                 loadUserBalance();
-                
+
                 showSection('dashboard');
                 updateDashboard();
             } else {
@@ -875,15 +1114,15 @@
             currentUser = null;
             userRole = null;
             clearUserSession(); // Clear from localStorage
-            
+
             document.getElementById('mainApp').classList.add('hidden');
             document.getElementById('loginModal').classList.remove('hidden');
             document.getElementById('adminMenu').classList.add('hidden');
-            
+
             // Reset forms
             document.getElementById('loginForm').reset();
             document.getElementById('registerForm').reset();
-            
+
             // Show login form by default
             showLoginForm();
         }
@@ -894,15 +1133,15 @@
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.add('hidden');
             });
-            
+
             // Remove active class from all nav items
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('bg-blue-50', 'text-blue-600');
             });
-            
+
             // Show selected section
             document.getElementById(sectionName + 'Section').classList.remove('hidden');
-            
+
             // Update page title
             const titles = {
                 'dashboard': 'Dashboard',
@@ -910,10 +1149,11 @@
                 'orders': 'Pesanan Saya',
                 'topup': 'Top Up Saldo',
                 'topupAdmin': 'Konfirmasi Top Up',
-                'manage': 'Kelola Kuota'
+                'manage': 'Kelola Kuota',
+                'users': 'Kelola User'
             };
             document.getElementById('pageTitle').textContent = titles[sectionName];
-            
+
             // Update content based on section
             if (sectionName === 'products') {
                 renderQuotaList();
@@ -927,6 +1167,8 @@
                 renderAdminTopupSection();
             } else if (sectionName === 'manage') {
                 renderManageQuotaList();
+            } else if (sectionName === 'users') {
+                renderUsersList();
             } else if (sectionName === 'dashboard') {
                 updateDashboard();
             }
@@ -936,17 +1178,17 @@
         function updateDashboard() {
             document.getElementById('totalQuota').textContent = quotaData.length;
             document.getElementById('myOrders').textContent = orders.length;
-            
+
             // Update balance display
             const balanceElements = document.querySelectorAll('.balance-display');
             balanceElements.forEach(el => {
                 el.textContent = `Rp ${userBalance.toLocaleString()}`;
             });
-            
+
             // Show popular quota (first 3 items)
             const popularContainer = document.getElementById('popularQuota');
             popularContainer.innerHTML = '';
-            
+
             quotaData.slice(0, 3).forEach(quota => {
                 const quotaCard = createQuotaCard(quota, true);
                 popularContainer.appendChild(quotaCard);
@@ -957,7 +1199,7 @@
         function createQuotaCard(quota, isPopular = false) {
             const card = document.createElement('div');
             card.className = 'bg-gradient-to-r from-blue-500 to-purple-600 text-white p-3 md:p-4 rounded-xl card-hover';
-            
+
             card.innerHTML = `
                 <div class="flex items-center justify-between mb-2 md:mb-3">
                     <span class="text-xs md:text-sm font-medium bg-white bg-opacity-20 px-2 py-1 rounded-full">${quota.provider}</span>
@@ -970,7 +1212,7 @@
                     ${userRole !== 'Administrator' ? `<button onclick="openPurchaseModal(${quota.id})" class="bg-white text-blue-600 px-2 md:px-3 py-1 rounded-lg text-xs md:text-sm font-medium hover:bg-gray-100 transition duration-200">Beli</button>` : ''}
                 </div>
             `;
-            
+
             return card;
         }
 
@@ -978,15 +1220,15 @@
         function renderQuotaList() {
             const container = document.getElementById('quotaList');
             const filter = document.getElementById('providerFilter').value;
-            
+
             container.innerHTML = '';
-            
+
             const filteredQuota = filter ? quotaData.filter(q => q.provider === filter) : quotaData;
-            
+
             filteredQuota.forEach(quota => {
                 const card = document.createElement('div');
                 card.className = 'bg-white border border-gray-200 rounded-xl p-6 card-hover';
-                
+
                 card.innerHTML = `
                     <div class="flex items-center justify-between mb-4">
                         <span class="text-sm font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">${quota.provider}</span>
@@ -999,7 +1241,7 @@
                         ${userRole !== 'Administrator' ? `<button onclick="openPurchaseModal(${quota.id})" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200"><i class="fas fa-shopping-cart mr-2"></i>Beli</button>` : ''}
                     </div>
                 `;
-                
+
                 container.appendChild(card);
             });
         }
@@ -1011,7 +1253,7 @@
         function openPurchaseModal(quotaId) {
             selectedQuota = quotaData.find(q => q.id === quotaId);
             if (!selectedQuota) return;
-            
+
             const detailsContainer = document.getElementById('purchaseDetails');
             detailsContainer.innerHTML = `
                 <div class="bg-gray-50 rounded-lg p-4">
@@ -1033,7 +1275,7 @@
                     </div>
                 </div>
             `;
-            
+
             document.getElementById('purchaseModal').classList.remove('hidden');
         }
 
@@ -1044,32 +1286,32 @@
         }
 
         // Purchase form
-        document.getElementById('purchaseForm').addEventListener('submit', function(e) {
+        document.getElementById('purchaseForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const phoneNumber = document.getElementById('phoneNumber').value;
-            
+
             if (!phoneNumber) {
                 alert('Mohon masukkan nomor HP!');
                 return;
             }
-            
+
             if (!/^08\d{8,11}$/.test(phoneNumber)) {
                 alert('Format nomor HP tidak valid! Gunakan format 08xxxxxxxxxx');
                 return;
             }
-            
+
             // Check if user has enough balance
             if (userBalance < selectedQuota.price) {
                 alert(`Saldo tidak mencukupi! Saldo Anda: Rp ${userBalance.toLocaleString()}, Harga kuota: Rp ${selectedQuota.price.toLocaleString()}`);
                 return;
             }
-            
+
             // Deduct balance
             userBalance -= selectedQuota.price;
-            
+
             // Save updated balance
             saveUserBalance();
-            
+
             const order = {
                 id: orders.length + 1,
                 quota: selectedQuota,
@@ -1078,9 +1320,9 @@
                 time: new Date().toLocaleTimeString('id-ID'),
                 status: 'Berhasil'
             };
-            
+
             orders.push(order);
-            
+
             alert(`Pembelian berhasil! Kuota ${selectedQuota.quota} ${selectedQuota.provider} telah diaktifkan ke nomor ${phoneNumber}. Saldo tersisa: Rp ${userBalance.toLocaleString()}`);
             closePurchaseModal();
             updateDashboard();
@@ -1089,7 +1331,7 @@
         // Render orders list
         function renderOrdersList() {
             const container = document.getElementById('ordersList');
-            
+
             if (orders.length === 0) {
                 container.innerHTML = `
                     <div class="text-center py-8 text-gray-500">
@@ -1099,13 +1341,13 @@
                 `;
                 return;
             }
-            
+
             container.innerHTML = '';
-            
+
             orders.forEach(order => {
                 const orderCard = document.createElement('div');
                 orderCard.className = 'bg-gray-50 rounded-lg p-4 border border-gray-200';
-                
+
                 orderCard.innerHTML = `
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-sm font-medium text-gray-600">Order #${order.id}</span>
@@ -1137,7 +1379,7 @@
                         </button>
                     </div>
                 `;
-                
+
                 container.appendChild(orderCard);
             });
         }
@@ -1146,11 +1388,11 @@
         function renderManageQuotaList() {
             const container = document.getElementById('manageQuotaList');
             container.innerHTML = '';
-            
+
             quotaData.forEach(quota => {
                 const row = document.createElement('tr');
                 row.className = 'border-b border-gray-100 hover:bg-gray-50';
-                
+
                 row.innerHTML = `
                     <td class="py-3 px-4">
                         <input type="checkbox" class="quota-checkbox rounded border-gray-300 text-blue-600 focus:ring-blue-500" 
@@ -1169,10 +1411,10 @@
                         </button>
                     </td>
                 `;
-                
+
                 container.appendChild(row);
             });
-            
+
             // Reset selection state
             document.getElementById('selectAllQuotas').checked = false;
             updateSelectedCount();
@@ -1195,7 +1437,7 @@
             document.getElementById('editQuota').value = quota.quota;
             document.getElementById('editPrice').value = quota.price;
             document.getElementById('editDuration').value = quota.duration;
-            
+
             document.getElementById('editQuotaModal').classList.remove('hidden');
         }
 
@@ -1205,12 +1447,12 @@
         }
 
         // Add quota form
-        document.getElementById('addQuotaForm').addEventListener('submit', function(e) {
+        document.getElementById('addQuotaForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Generate new ID based on highest existing ID
             const maxId = quotaData.length > 0 ? Math.max(...quotaData.map(q => q.id)) : 0;
-            
+
             const newQuota = {
                 id: maxId + 1,
                 provider: document.getElementById('newProvider').value,
@@ -1218,44 +1460,44 @@
                 price: parseInt(document.getElementById('newPrice').value),
                 duration: document.getElementById('newDuration').value
             };
-            
+
             quotaData.push(newQuota);
             saveQuotaData(); // Save to localStorage
             closeAddQuotaModal();
             renderManageQuotaList();
             updateDashboard();
-            
+
             alert('Kuota berhasil ditambahkan!');
         });
 
         // Edit quota form
-        document.getElementById('editQuotaForm').addEventListener('submit', function(e) {
+        document.getElementById('editQuotaForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const quotaId = parseInt(document.getElementById('editQuotaId').value);
             const quotaIndex = quotaData.findIndex(q => q.id === quotaId);
-            
+
             if (quotaIndex === -1) {
                 alert('Kuota tidak ditemukan!');
                 return;
             }
-            
+
             // Validation
             const provider = document.getElementById('editProvider').value;
             const quota = document.getElementById('editQuota').value.trim();
             const price = parseInt(document.getElementById('editPrice').value);
             const duration = document.getElementById('editDuration').value.trim();
-            
+
             if (!provider || !quota || !price || !duration) {
                 alert('Mohon lengkapi semua field!');
                 return;
             }
-            
+
             if (price <= 0) {
                 alert('Harga harus lebih dari 0!');
                 return;
             }
-            
+
             // Update quota data
             quotaData[quotaIndex] = {
                 id: quotaId,
@@ -1264,17 +1506,17 @@
                 price: price,
                 duration: duration
             };
-            
+
             saveQuotaData(); // Save to localStorage
             closeEditQuotaModal();
             renderManageQuotaList();
             updateDashboard();
-            
+
             // Update product list if currently viewing
             if (document.getElementById('productsSection').classList.contains('hidden') === false) {
                 renderQuotaList();
             }
-            
+
             alert('Kuota berhasil diperbarui!');
         });
 
@@ -1305,7 +1547,7 @@
                 alert('Kuota tidak ditemukan!');
                 return;
             }
-            
+
             // Show edit modal
             showEditQuotaModal(quota);
         }
@@ -1314,40 +1556,40 @@
         function selectAmount(amount) {
             // Clear custom amount
             document.getElementById('customAmount').value = '';
-            
+
             // Update button styles
             document.querySelectorAll('.amount-btn').forEach(btn => {
                 btn.classList.remove('border-blue-500', 'bg-blue-50');
                 btn.classList.add('border-gray-300');
             });
-            
+
             // Highlight selected button
             event.target.closest('.amount-btn').classList.remove('border-gray-300');
             event.target.closest('.amount-btn').classList.add('border-blue-500', 'bg-blue-50');
-            
+
             // Store selected amount
             event.target.closest('.amount-btn').dataset.selected = amount;
         }
 
         // Top Up Form
-        document.getElementById('topupForm').addEventListener('submit', async function(e) {
+        document.getElementById('topupForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             let amount = 0;
             const customAmount = document.getElementById('customAmount').value;
             const selectedBtn = document.querySelector('.amount-btn.border-blue-500');
-            
+
             if (customAmount) {
                 amount = parseInt(customAmount);
             } else if (selectedBtn) {
                 amount = parseInt(selectedBtn.dataset.selected);
             }
-            
+
             if (!amount || amount < 10000) {
                 alert('Minimal top up Rp 10.000!');
                 return;
             }
-            
+
             const paymentMethod = document.getElementById('paymentMethod').value;
             await generatePaymentCode(amount, paymentMethod);
         });
@@ -1357,16 +1599,16 @@
             // Bank transfer - with unique code
             const uniqueCode = Math.floor(Math.random() * 999) + 1;
             const totalAmount = amount + uniqueCode;
-            
+
             const bankAccounts = {
-                //'bca': { name: 'BCA', number: '1234567890', holder: 'RFNSTORE' },
-                //'mandiri': { name: 'Mandiri', number: '9876543210', holder: 'RFNSTORE' },
+                // 'bca': { name: 'BCA', number: '1234567890', holder: 'RFNSTORE' },
+                //  'mandiri': { name: 'Mandiri', number: '9876543210', holder: 'RFNSTORE' },
                 'bri': { name: 'BRI', number: '617701027476538', holder: 'RIFAN AGUSTIAN' },
-                //'bni': { name: 'BNI', number: '1111222233', holder: 'RFNSTORE' }
+                // 'bni': { name: 'BNI', number: '1111222233', holder: 'RFNSTORE' }
             };
-            
+
             const bank = bankAccounts[method];
-            
+
             const currentPaymentData = {
                 id: 'TU' + Date.now(),
                 username: currentUser,
@@ -1379,15 +1621,15 @@
                 createdAt: new Date(),
                 expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
             };
-            
+
             // Save to global storage
             allTopupRequests.push(currentPaymentData);
             saveAllTopupRequests();
-            
+
             currentPayment = currentPaymentData;
             showPaymentModal();
             startPaymentTimer();
-            
+
             // Update admin badge if admin is logged in
             updateAdminTopupBadge();
         }
@@ -1397,7 +1639,7 @@
         // Show Payment Modal
         function showPaymentModal() {
             const detailsContainer = document.getElementById('paymentDetails');
-            
+
             // Bank Transfer Display
             detailsContainer.innerHTML = `
                 <div class="space-y-4">
@@ -1464,9 +1706,9 @@
                     </div>
                 </div>
             `;
-            
+
             document.getElementById('paymentModal').classList.remove('hidden');
-            
+
             // Show bank transfer buttons only
             document.getElementById('bankTransferButtons').classList.remove('hidden');
             document.getElementById('qrisButtons').classList.add('hidden');
@@ -1476,11 +1718,11 @@
         function startPaymentTimer() {
             const timerElement = document.getElementById('paymentTimer');
             const endTime = currentPayment.expiresAt.getTime();
-            
+
             paymentTimer = setInterval(() => {
                 const now = new Date().getTime();
                 const timeLeft = endTime - now;
-                
+
                 if (timeLeft <= 0) {
                     clearInterval(paymentTimer);
                     timerElement.textContent = '00:00:00';
@@ -1488,11 +1730,11 @@
                     closePaymentModal();
                     return;
                 }
-                
+
                 const hours = Math.floor(timeLeft / (1000 * 60 * 60));
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
+
                 timerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }, 1000);
         }
@@ -1537,7 +1779,7 @@
         // WhatsApp confirmation function
         function confirmPaymentWhatsApp(topupId = null) {
             let payment = currentPayment;
-            
+
             // If topupId is provided, find the specific topup request
             if (topupId) {
                 payment = allTopupRequests.find(req => req.id === topupId);
@@ -1546,9 +1788,9 @@
                     return;
                 }
             }
-            
+
             if (!payment) return;
-            
+
             const message = `Halo Admin RFNSTORE,
 
 Saya ingin konfirmasi pembayaran top up:
@@ -1568,7 +1810,7 @@ Mohon diproses segera. Terima kasih! 🙏`;
 
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/628885252823?text=${encodedMessage}`;
-            
+
             window.open(whatsappUrl, '_blank');
         }
 
@@ -1579,26 +1821,26 @@ Mohon diproses segera. Terima kasih! 🙏`;
                 clearInterval(paymentTimer);
                 paymentTimer = null;
             }
-            
+
             // Add to history if payment was created
             if (currentPayment) {
                 topupHistory.push(currentPayment);
                 renderTopupHistory();
-                
+
                 console.log(`💰 Manual payment created: ${currentPayment.id}`);
                 console.log(`📋 Transfer Rp ${currentPayment.totalAmount.toLocaleString()} ke ${currentPayment.bank.name} ${currentPayment.bank.number} (${currentPayment.bank.holder})`);
             }
-            
+
             currentPayment = null;
         }
 
         // Render Top Up History
         function renderTopupHistory() {
             const container = document.getElementById('topupHistory');
-            
+
             // Get user's top up history from global storage
             const userTopupHistory = allTopupRequests.filter(req => req.username === currentUser);
-            
+
             if (userTopupHistory.length === 0) {
                 container.innerHTML = `
                     <div class="text-center py-8 text-gray-500">
@@ -1608,28 +1850,27 @@ Mohon diproses segera. Terima kasih! 🙏`;
                 `;
                 return;
             }
-            
+
             container.innerHTML = '';
-            
+
             // Sort by newest first
             const sortedHistory = [...userTopupHistory].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            
+
             sortedHistory.forEach(topup => {
-                const statusColor = topup.status === 'success' ? 'green' : 
-                                  topup.status === 'pending' ? 'yellow' : 
-                                  topup.status === 'expired' ? 'gray' : 'red';
-                const statusText = topup.status === 'success' ? 'Berhasil' : 
-                                 topup.status === 'pending' ? 'Menunggu' : 
-                                 topup.status === 'expired' ? 'Kedaluwarsa' : 'Ditolak';
+                const statusColor = topup.status === 'success' ? 'green' :
+                    topup.status === 'pending' ? 'yellow' :
+                        topup.status === 'expired' ? 'gray' : 'red';
+                const statusText = topup.status === 'success' ? 'Berhasil' :
+                    topup.status === 'pending' ? 'Menunggu' :
+                        topup.status === 'expired' ? 'Kedaluwarsa' : 'Ditolak';
                 const failReason = topup.failReason || '';
-                
+
                 const topupCard = document.createElement('div');
-                topupCard.className = `bg-gray-50 rounded-lg p-4 border-2 ${
-                    topup.status === 'success' ? 'border-green-200 bg-green-50' : 
-                    topup.status === 'failed' ? 'border-red-200 bg-red-50' : 
-                    'border-gray-200'
-                }`;
-                
+                topupCard.className = `bg-gray-50 rounded-lg p-4 border-2 ${topup.status === 'success' ? 'border-green-200 bg-green-50' :
+                        topup.status === 'failed' ? 'border-red-200 bg-red-50' :
+                            'border-gray-200'
+                    }`;
+
                 const paymentMethodDisplay = `
                     <div>
                         <p class="text-sm text-gray-600">Bank</p>
@@ -1648,7 +1889,7 @@ Mohon diproses segera. Terima kasih! 🙏`;
                         <p class="font-bold text-blue-600">Rp ${topup.totalAmount.toLocaleString()}</p>
                     </div>
                 `;
-                
+
                 // Status message with details
                 let statusMessage = '';
                 if (topup.status === 'success') {
@@ -1672,7 +1913,7 @@ Mohon diproses segera. Terima kasih! 🙏`;
                         Pastikan sudah transfer dan konfirmasi via WhatsApp
                     </div>`;
                 }
-                
+
                 topupCard.innerHTML = `
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-sm font-medium text-gray-600">${topup.id}</span>
@@ -1694,7 +1935,7 @@ Mohon diproses segera. Terima kasih! 🙏`;
                     </div>
                     ${statusMessage}
                 `;
-                
+
                 container.appendChild(topupCard);
             });
         }
@@ -1703,11 +1944,11 @@ Mohon diproses segera. Terima kasih! 🙏`;
         function toggleSelectAll() {
             const selectAllCheckbox = document.getElementById('selectAllQuotas');
             const quotaCheckboxes = document.querySelectorAll('.quota-checkbox');
-            
+
             quotaCheckboxes.forEach(checkbox => {
                 checkbox.checked = selectAllCheckbox.checked;
             });
-            
+
             updateSelectedCount();
         }
 
@@ -1715,10 +1956,10 @@ Mohon diproses segera. Terima kasih! 🙏`;
             const selectedCheckboxes = document.querySelectorAll('.quota-checkbox:checked');
             const count = selectedCheckboxes.length;
             const totalCheckboxes = document.querySelectorAll('.quota-checkbox');
-            
+
             // Update counter
             document.getElementById('selectedCount').textContent = count;
-            
+
             // Show/hide delete button
             const deleteBtn = document.getElementById('deleteSelectedBtn');
             if (count > 0) {
@@ -1726,7 +1967,7 @@ Mohon diproses segera. Terima kasih! 🙏`;
             } else {
                 deleteBtn.classList.add('hidden');
             }
-            
+
             // Update select all checkbox state
             const selectAllCheckbox = document.getElementById('selectAllQuotas');
             if (count === 0) {
@@ -1744,34 +1985,34 @@ Mohon diproses segera. Terima kasih! 🙏`;
         function deleteSelectedQuotas() {
             const selectedCheckboxes = document.querySelectorAll('.quota-checkbox:checked');
             const selectedIds = Array.from(selectedCheckboxes).map(cb => parseInt(cb.value));
-            
+
             if (selectedIds.length === 0) {
                 alert('Pilih kuota yang ingin dihapus terlebih dahulu!');
                 return;
             }
-            
+
             // Get quota details for confirmation
             const selectedQuotas = quotaData.filter(quota => selectedIds.includes(quota.id));
             const quotaNames = selectedQuotas.map(q => `${q.quota} ${q.provider}`).join(', ');
-            
+
             const confirmMessage = `Apakah Anda yakin ingin menghapus ${selectedIds.length} kuota berikut?\n\n${quotaNames}`;
-            
+
             if (confirm(confirmMessage)) {
                 // Remove selected quotas
                 const originalLength = quotaData.length;
                 quotaData = quotaData.filter(quota => !selectedIds.includes(quota.id));
                 const deletedCount = originalLength - quotaData.length;
-                
+
                 if (deletedCount > 0) {
                     saveQuotaData(); // Save to localStorage
-                    
+
                     // Update displays
                     renderManageQuotaList();
                     updateDashboard();
                     if (document.getElementById('productsSection').classList.contains('hidden') === false) {
                         renderQuotaList(); // Update product list if currently viewing
                     }
-                    
+
                     alert(`${deletedCount} kuota berhasil dihapus!`);
                 } else {
                     alert('Tidak ada kuota yang dihapus!');
@@ -1786,52 +2027,52 @@ Mohon diproses segera. Terima kasih! 🙏`;
                 localStorage.setItem('userRole', userRole);
             }
         }
-        
+
         // Load user session from localStorage
         function loadUserSession() {
             const savedUser = localStorage.getItem('currentUser');
             const savedRole = localStorage.getItem('userRole');
-            
+
             if (savedUser && savedRole) {
                 currentUser = savedUser;
                 userRole = savedRole;
-                
+
                 // Hide login modal and show main app
                 document.getElementById('loginModal').classList.add('hidden');
                 document.getElementById('mainApp').classList.remove('hidden');
-                
+
                 // Update UI
                 document.getElementById('currentUser').textContent = currentUser;
                 document.getElementById('userRole').textContent = userRole;
-                
+
                 // Show admin menu if user is admin
                 if (userRole === 'Administrator') {
                     document.getElementById('adminMenu').classList.remove('hidden');
                 }
-                
+
                 // Show dashboard
                 // Load user's balance
                 loadUserBalance();
-                
+
                 showSection('dashboard');
                 updateDashboard();
-                
+
                 return true;
             }
             return false;
         }
-        
+
         // Clear user session
         function clearUserSession() {
             localStorage.removeItem('currentUser');
             localStorage.removeItem('userRole');
         }
-        
+
         // Admin Top Up Management Functions
         function updateAdminTopupBadge() {
             const pendingCount = allTopupRequests.filter(req => req.status === 'pending').length;
             const badge = document.getElementById('pendingTopupBadge');
-            
+
             if (pendingCount > 0) {
                 badge.textContent = pendingCount;
                 badge.classList.remove('hidden');
@@ -1850,7 +2091,7 @@ Mohon diproses segera. Terima kasih! 🙏`;
         function updateAdminTopupStats() {
             const today = new Date().toDateString();
             const pendingCount = allTopupRequests.filter(req => req.status === 'pending').length;
-            const todaySuccess = allTopupRequests.filter(req => 
+            const todaySuccess = allTopupRequests.filter(req =>
                 req.status === 'success' && new Date(req.createdAt).toDateString() === today
             );
             const todayTotal = todaySuccess.reduce((sum, req) => sum + req.amount, 0);
@@ -1966,11 +2207,11 @@ Mohon diproses segera. Terima kasih! 🙏`;
             if (dateFilter) {
                 const now = new Date();
                 const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                
+
                 filteredTopups = filteredTopups.filter(topup => {
                     const topupDate = new Date(topup.createdAt);
-                    
-                    switch(dateFilter) {
+
+                    switch (dateFilter) {
                         case 'today':
                             return topupDate >= today;
                         case 'week':
@@ -1999,12 +2240,12 @@ Mohon diproses segera. Terima kasih! 🙏`;
             container.innerHTML = '';
 
             filteredTopups.forEach(topup => {
-                const statusColor = topup.status === 'success' ? 'green' : 
-                                  topup.status === 'pending' ? 'yellow' : 
-                                  topup.status === 'expired' ? 'gray' : 'red';
-                const statusText = topup.status === 'success' ? 'Berhasil' : 
-                                 topup.status === 'pending' ? 'Menunggu' : 
-                                 topup.status === 'expired' ? 'Kedaluwarsa' : 'Ditolak';
+                const statusColor = topup.status === 'success' ? 'green' :
+                    topup.status === 'pending' ? 'yellow' :
+                        topup.status === 'expired' ? 'gray' : 'red';
+                const statusText = topup.status === 'success' ? 'Berhasil' :
+                    topup.status === 'pending' ? 'Menunggu' :
+                        topup.status === 'expired' ? 'Kedaluwarsa' : 'Ditolak';
 
                 const topupCard = document.createElement('div');
                 topupCard.className = 'bg-gray-50 rounded-lg p-4 border border-gray-200';
@@ -2152,7 +2393,7 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
         }
 
         // Add event listeners for filters
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Status filter
             const statusFilter = document.getElementById('statusFilter');
             if (statusFilter) {
@@ -2170,7 +2411,7 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
         function toggleMobileSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobileOverlay');
-            
+
             if (sidebar.classList.contains('-translate-x-full')) {
                 // Show sidebar
                 sidebar.classList.remove('-translate-x-full');
@@ -2185,14 +2426,14 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
         function closeMobileSidebar() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('mobileOverlay');
-            
+
             sidebar.classList.add('-translate-x-full');
             sidebar.classList.remove('translate-x-0');
             overlay.classList.add('hidden');
         }
 
         // Close mobile sidebar when clicking nav items
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (e.target.closest('.nav-item')) {
                 // Small delay to allow navigation to complete
                 setTimeout(closeMobileSidebar, 100);
@@ -2202,7 +2443,7 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
         // Check for balance updates
         function checkBalanceUpdates() {
             if (!currentUser) return;
-            
+
             // Reload user balance from localStorage
             const savedBalance = localStorage.getItem('userBalance_' + currentUser);
             if (savedBalance) {
@@ -2210,7 +2451,7 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
                 if (newBalance !== userBalance) {
                     userBalance = newBalance;
                     updateDashboard();
-                    
+
                     // Show notification if balance increased
                     if (newBalance > userBalance) {
                         const increase = newBalance - userBalance;
@@ -2231,14 +2472,14 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
                     <span>${message}</span>
                 </div>
             `;
-            
+
             document.body.appendChild(notification);
-            
+
             // Show notification
             setTimeout(() => {
                 notification.classList.remove('translate-x-full');
             }, 100);
-            
+
             // Hide notification after 5 seconds
             setTimeout(() => {
                 notification.classList.add('translate-x-full');
@@ -2248,27 +2489,230 @@ ${topup.failReason ? `Alasan: ${topup.failReason}` : ''}
             }, 5000);
         }
 
+        // Initialize default quota data if empty (only once)
+        function initializeDefaultQuota() {
+            if (quotaData.length === 0) {
+                quotaData = [
+                    { id: 1, provider: 'Telkomsel', quota: '10GB', price: 25000, duration: '30 hari' },
+                    { id: 2, provider: 'Telkomsel', quota: '20GB', price: 45000, duration: '30 hari' },
+                    { id: 3, provider: 'Indosat', quota: '15GB', price: 30000, duration: '30 hari' },
+                    { id: 4, provider: 'XL', quota: '12GB', price: 28000, duration: '30 hari' },
+                    { id: 5, provider: 'Tri', quota: '25GB', price: 35000, duration: '30 hari' },
+                    { id: 6, provider: 'Telkomsel', quota: '5GB', price: 15000, duration: '7 hari' },
+                    { id: 7, provider: 'Indosat', quota: '8GB', price: 20000, duration: '15 hari' },
+                    { id: 8, provider: 'XL', quota: '30GB', price: 50000, duration: '30 hari' },
+                    { id: 9, provider: 'Tri', quota: '50GB', price: 65000, duration: '30 hari' },
+                    { id: 10, provider: 'Telkomsel', quota: '3GB', price: 12000, duration: '3 hari' },
+                    { id: 11, provider: 'Indosat', quota: '40GB', price: 55000, duration: '30 hari' },
+                    { id: 12, provider: 'XL', quota: '6GB', price: 18000, duration: '7 hari' }
+                ];
+                saveQuotaData();
+            }
+        }
+
+        // User Management Functions
+        function renderUsersList() {
+            const container = document.getElementById('usersList');
+            const totalUsersCount = document.getElementById('totalUsersCount');
+
+            container.innerHTML = '';
+            totalUsersCount.textContent = registeredUsers.length;
+
+            registeredUsers.forEach((user, index) => {
+                // Get user balance
+                const userBalanceKey = 'userBalance_' + user.username;
+                const userBalance = parseInt(localStorage.getItem(userBalanceKey) || '0');
+
+                const row = document.createElement('tr');
+                row.className = 'border-b border-gray-100 hover:bg-gray-50';
+
+                const roleDisplay = user.role === 'admin' ? 'Admin' : 'User';
+                const roleColor = user.role === 'admin' ? 'text-red-600 bg-red-100' : 'text-blue-600 bg-blue-100';
+
+                row.innerHTML = `
+                    <td class="py-3 px-4 font-medium">${user.username}</td>
+                    <td class="py-3 px-4">
+                        <span class="font-mono text-sm bg-gray-100 px-2 py-1 rounded">${user.password}</span>
+                    </td>
+                    <td class="py-3 px-4">${user.email}</td>
+                    <td class="py-3 px-4">${user.phone}</td>
+                    <td class="py-3 px-4">
+                        <span class="text-xs px-2 py-1 rounded-full ${roleColor}">${roleDisplay}</span>
+                    </td>
+                    <td class="py-3 px-4 font-medium text-green-600">Rp ${userBalance.toLocaleString()}</td>
+                    <td class="py-3 px-4">
+                        <button onclick="editUser(${index})" class="text-blue-600 hover:text-blue-800 mr-2 px-2 py-1 rounded hover:bg-blue-50" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        ${user.username !== currentUser ? `
+                            <button onclick="deleteUser(${index})" class="text-red-600 hover:text-red-800 px-2 py-1 rounded hover:bg-red-50" title="Hapus">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        ` : ''}
+                    </td>
+                `;
+
+                container.appendChild(row);
+            });
+        }
+
+        function editUser(userIndex) {
+            const user = registeredUsers[userIndex];
+            if (!user) {
+                alert('User tidak ditemukan!');
+                return;
+            }
+
+            // Get user balance
+            const userBalanceKey = 'userBalance_' + user.username;
+            const userBalance = parseInt(localStorage.getItem(userBalanceKey) || '0');
+
+            // Fill form
+            document.getElementById('editUserIndex').value = userIndex;
+            document.getElementById('editUserUsername').value = user.username;
+            document.getElementById('editUserPassword').value = user.password;
+            document.getElementById('editUserEmail').value = user.email;
+            document.getElementById('editUserPhone').value = user.phone;
+            document.getElementById('editUserRole').value = user.role;
+            document.getElementById('editUserBalance').value = userBalance;
+
+            // Show modal
+            document.getElementById('editUserModal').classList.remove('hidden');
+        }
+
+        function closeEditUserModal() {
+            document.getElementById('editUserModal').classList.add('hidden');
+            document.getElementById('editUserForm').reset();
+        }
+
+        function deleteUser(userIndex) {
+            const user = registeredUsers[userIndex];
+            if (!user) {
+                alert('User tidak ditemukan!');
+                return;
+            }
+
+            if (user.username === currentUser) {
+                alert('Tidak dapat menghapus akun yang sedang login!');
+                return;
+            }
+
+            if (confirm(`Apakah Anda yakin ingin menghapus user "${user.username}"?\n\nData user dan saldo akan dihapus permanen!`)) {
+                // Remove user from array
+                registeredUsers.splice(userIndex, 1);
+
+                // Remove user balance from localStorage
+                localStorage.removeItem('userBalance_' + user.username);
+
+                // Save changes
+                saveRegisteredUsers();
+
+                // Refresh list
+                renderUsersList();
+
+                alert(`User "${user.username}" berhasil dihapus!`);
+            }
+        }
+
+        // Edit User Form Handler
+        document.getElementById('editUserForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const userIndex = parseInt(document.getElementById('editUserIndex').value);
+            const user = registeredUsers[userIndex];
+
+            if (!user) {
+                alert('User tidak ditemukan!');
+                return;
+            }
+
+            // Get form values
+            const newPassword = document.getElementById('editUserPassword').value.trim();
+            const newEmail = document.getElementById('editUserEmail').value.trim();
+            const newPhone = document.getElementById('editUserPhone').value.trim();
+            const newRole = document.getElementById('editUserRole').value;
+            const newBalance = parseInt(document.getElementById('editUserBalance').value) || 0;
+
+            // Validation
+            if (!newPassword || !newEmail || !newPhone) {
+                alert('Mohon lengkapi semua field!');
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                alert('Password minimal 6 karakter!');
+                return;
+            }
+
+            // Check if email is already used by another user
+            const emailExists = registeredUsers.some((u, index) =>
+                index !== userIndex && u.email === newEmail
+            );
+            if (emailExists) {
+                alert('Email sudah digunakan oleh user lain!');
+                return;
+            }
+
+            if (newBalance < 0) {
+                alert('Saldo tidak boleh negatif!');
+                return;
+            }
+
+            // Update user data
+            registeredUsers[userIndex] = {
+                ...user,
+                password: newPassword,
+                email: newEmail,
+                phone: newPhone,
+                role: newRole
+            };
+
+            // Update user balance
+            const userBalanceKey = 'userBalance_' + user.username;
+            localStorage.setItem(userBalanceKey, newBalance.toString());
+
+            // If editing current user's balance, update the global variable
+            if (user.username === currentUser) {
+                userBalance = newBalance;
+                updateDashboard();
+            }
+
+            // Save changes
+            saveRegisteredUsers();
+
+            // Close modal and refresh list
+            closeEditUserModal();
+            renderUsersList();
+
+            alert(`Data user "${user.username}" berhasil diperbarui!`);
+        });
+
         // Initialize app
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize default quota data if needed
+            initializeDefaultQuota();
+
             // Try to load existing session first
             const sessionLoaded = loadUserSession();
-            
+
             // If no session found, show login modal
             if (!sessionLoaded) {
                 document.getElementById('loginModal').classList.remove('hidden');
                 document.getElementById('mainApp').classList.add('hidden');
             }
-            
+
             // Update admin badge on load
             if (userRole === 'Administrator') {
                 updateAdminTopupBadge();
             }
-            
+
             // Set up periodic balance check for logged in users
             if (currentUser) {
                 setInterval(checkBalanceUpdates, 5000); // Check every 5 seconds
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'976da698a1d2df97',t:'MTc1NjQ4NzMxMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'977045b7716fdf97',t:'MTc1NjUxNDc5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+</body>
+
 </html>
